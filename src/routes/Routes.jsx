@@ -7,7 +7,7 @@ import Category from '../pages/Category'
 
 const Routes = () => {
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <BrowserRouter>
       <Layout>
         <Switch>
           <Route exact path="/" component={Home} />

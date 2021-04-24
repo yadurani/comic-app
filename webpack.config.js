@@ -1,11 +1,10 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const webpack = require('webpack')
 
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
     publicPath: '/',
   },
@@ -40,12 +39,9 @@ module.exports = {
       template: './public/index.html',
       filename: './index.html',
     }),
-    new webpack.ProvidePlugin({
-      process: 'process/browser',
-    }),
   ],
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.join(__dirname, 'build'),
     port: 3005,
     hot: true,
     open: true,

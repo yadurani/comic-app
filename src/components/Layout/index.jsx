@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
       <div className="main">{children}</div>
       <div className="copyright">
         Create by Yadu López 💛. Github
-        <a href="" target="blank">
+        <a href="https://github.com/yadurani/comic-app" target="blank">
           Comic - xkcd.
         </a>
       </div>
