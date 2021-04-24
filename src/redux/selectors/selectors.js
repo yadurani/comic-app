@@ -14,3 +14,10 @@ export const categoriesSelector = createSelector(
   (state) => state.Category.listSelected,
   (v) => v
 )
+
+export const countCategoriesSelector = (category) =>
+  createSelector(
+    (state) => state.Category.listSelected,
+    (listCategories) =>
+      listCategories.filter((item) => item.category === category).length
+  )

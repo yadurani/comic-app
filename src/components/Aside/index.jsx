@@ -3,25 +3,13 @@ import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { categories } from '../../constants/filters'
-import getNumberCategory from '../../helpers/generateCountCategories'
 import '../../styles/aside.scss'
-import { categoriesSelector } from '../../redux/selectors/selectors'
+import {
+  categoriesSelector,
+  countCategoriesSelector,
+} from '../../redux/selectors/selectors'
 
-const Aside = ({ listCategories }) => {
-  const listMenusAside = categories.map((category) => {
-    const numberCategory = getNumberCategory(listCategories, category)
-    return (
-      <li key={category} className="sidebar__item">
-        <NavLink
-          exact
-          to={category.toLowerCase()}
-          activeClassName="sidebar__item--active">
-          {category}
-          <span>{numberCategory}</span>
-        </NavLink>
-      </li>
-    )
-  })
+const Aside = ({ count }) => {
   return (
     <ul className="sidebar">
       <li className="sidebar__item">
@@ -29,13 +17,24 @@ const Aside = ({ listCategories }) => {
           Inicio
         </NavLink>
       </li>
-      {listMenusAside}
+      {categories.map((category) => (
+        <li key={category} className="sidebar__item">
+          <NavLink
+            exact
+            to={category.toLowerCase()}
+            activeClassName="sidebar__item--active">
+            {category}
+            <span>{count(category)}</span>
+          </NavLink>
+        </li>
+      ))}
     </ul>
   )
 }
 
 const mapStateToProps = (state) => ({
   listCategories: categoriesSelector(state),
+  count: (category) => countCategoriesSelector(category)(state),
 })
 
 export default connect(mapStateToProps, null)(Aside)
