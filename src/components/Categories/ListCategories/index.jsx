@@ -1,22 +1,30 @@
 import React from 'react'
 
 import CategoryItem from '../CategoryItem'
-import '../../../styles/categories.scss'
 import { connect } from 'react-redux'
+import { useParams } from 'react-router'
+
 import { updateComic } from '../../../redux/actions/comicAction'
 import { removeComic } from '../../../redux/actions/categoryAction'
 import NotFound from '../../NotFound'
+import '../../../styles/categories.scss'
+import { categoriesSelector } from '../../../redux/selectors/selectors'
 
-const ListCategories = ({ categories, updateComic, removeComic }) => {
+const ListCategories = ({ listCategories, updateComic, removeComic }) => {
+  const categoryId = useParams().category
+  const filterCategories = listCategories.filter(
+    (category) => category.category.toLowerCase() === categoryId
+  )
+
   const deleteComic = (id) => () => {
     updateComic(id, null)
     removeComic(id)
   }
 
-  if (!categories.length) return <NotFound />
+  if (!filterCategories.length) return <NotFound />
   return (
     <section className="categories">
-      {categories.map((category) => (
+      {filterCategories.map((category) => (
         <CategoryItem
           key={category.num}
           category={category}
@@ -27,8 +35,13 @@ const ListCategories = ({ categories, updateComic, removeComic }) => {
   )
 }
 
+const mapStateToProps = (state) => ({
+  listCategories: categoriesSelector(state),
+})
+
 const mapDispatchToProps = {
   updateComic,
   removeComic,
 }
-export default connect(null, mapDispatchToProps)(ListCategories)
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListCategories)
