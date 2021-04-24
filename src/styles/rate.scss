@@ -1,0 +1,30 @@
+@import  './variables.scss' ;
+
+.rate {
+  @media(max-width: 768px) {
+    margin-bottom: 1rem;
+  }
+  &__input {
+    display: none;
+    &[type="radio"] +  label i{
+      color: yellow;
+      opacity: 1;
+    }
+    &[type=radio]:checked ~  label i {
+      color: white;
+      opacity: 0.5;
+    }
+  }
+  &__label {
+    font-size: 30px;
+    margin-right: 0.5rem;
+    cursor: pointer;
+  }
+  &__title {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+    @media(max-width: 768px) {
+      text-align: center;
+    }
+  }
+}
