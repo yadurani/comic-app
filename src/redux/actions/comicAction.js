@@ -4,12 +4,12 @@ import fetchComicId from '../../services/api'
 export const getComicById = (id) => async (dispatch, getState) => {
   const { Comic } = getState()
   const { data } = await fetchComicId(id)
-  const isExtistComics = Comic.comics.find((comic) => comic.num === id)
+  const isExtistComics = Comic.comics.some((comic) => comic.num === id)
 
   if (isExtistComics) {
     const comicExist = Comic.comics.find((comic) => comic.num === id)
     const payloadExist = {
-      current: isExtistComics ? comicExist : data,
+      current: comicExist,
     }
     dispatch({
       type: FETCH_COMIC_ID,

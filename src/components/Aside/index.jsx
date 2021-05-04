@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { categories } from '../../constants/filters'
 import '../../styles/aside.scss'
 import {
-  categoriesSelector,
   countCategoriesSelector,
 } from '../../redux/selectors/selectors'
 
@@ -33,7 +32,6 @@ const Aside = ({ count }) => {
 }
 
 const mapStateToProps = (state) => ({
-  listCategories: categoriesSelector(state),
   count: (category) => countCategoriesSelector(category)(state),
 })
 

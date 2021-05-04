@@ -17,7 +17,6 @@ import generateNumber from '../../helpers/generateNumber'
 import Select from '../Select'
 import {
   currentComicSelector,
-  comicsSelector,
 } from '../../redux/selectors/selectors'
 
 const Comic = ({
@@ -92,7 +91,6 @@ const Comic = ({
 
 const mapStateToProps = (state) => ({
   current: currentComicSelector(state),
-  comics: comicsSelector(state),
 })
 
 const mapDispatchToProps = {
